@@ -5,6 +5,8 @@
     v-bind:key = "card.id"
     :cityName = "card.name"
     :cityWeather = "card.main.temp"
+    :index = "card.id"
+    v-on:click.native = "gotoCard(card.name)"
     />
 
   </div>
@@ -36,7 +38,12 @@ export default {
     })
   },
   methods: {
-
+    gotoCard: function(index) {
+      this.$router.push({path: '/details/'+index}) // routes to card
+    },
+    // getCityById: function(index) {
+    //   return this.cards.filter(obj => { return obj.id = index })
+    // }
   }
 }
 </script>
