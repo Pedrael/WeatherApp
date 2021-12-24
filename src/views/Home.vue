@@ -6,7 +6,7 @@
     :cityName = "card.name"
     :cityWeather = "card.main.temp"
     :index = "card.id"
-    v-on:click.native = "gotoCard(card.name)"
+    v-on:click.native = "refreshCard(card.name)"
     />
 
   </div>
@@ -15,6 +15,8 @@
 <script>
 // @ is an alias to /src
 import CityCard from '@/components/CityCard.vue'
+
+//gotoCard(card.name, index)
 
 export default {
   name: 'Home',
@@ -38,12 +40,15 @@ export default {
     })
   },
   methods: {
-    gotoCard: function(index) {
-      this.$router.push({path: '/details/'+index}) // routes to card
+    gotoCard: function(cityName, index) {
+      this.$router.push({
+        path: '/details/'+cityName, query: {
+        lon: this.cards[index].coord.lon,
+        lat: this.cards[index].coord.lat
+      }})}, // routes to card
+      refreshCard: function(city) {
+        this.$store.dispatch('refreshCityFromAPI', city)
+      }
     },
-    // getCityById: function(index) {
-    //   return this.cards.filter(obj => { return obj.id = index })
-    // }
-  }
 }
 </script>

@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     citiesData: [],
+    detailedData: {},
     APIkey: "c019ef58a4ee6f4f143f7fc5e297a153"
   },
   mutations: {
@@ -16,23 +17,32 @@ export default new Vuex.Store({
     addCity (state, city) {
       state.citiesData.push(city)
     },
-    // updateCity (state, args) { // save changes in city
-    // args[0] - object, args[1] - id in array
-    // Object.assign(state.citiesData[args[1]], args[0], { // copy object
-    //   name: args[0].name,
-    //   todos: JSON.parse(JSON.stringify(args[0].todos))
-    // })
-    //}
+    updateCity (state, APIdata) { // save changes in city
+      const index = state.citiesData.findIndex((cityData => cityData.name == APIdata.name))
+      state.citiesData[index] = { ...APIdata }
+    },
+    setDetailedCity (state, data) {
+      state.detailedData = { ...data }
+    }
   },
   actions: {
     addCityFromAPI: async (context, city) => {
-      let {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey+"")
+      let {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey)
       context.commit('addCity', data)
+    },
+    refreshCityFromAPI: async (context, city) => {
+      let {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey)
+      context.commit('updateCity', data)
+    },
+    getDetailedDataFromAPI: async (context, params) => {
+      let {data} = await axios.get("https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,daily,alerts&lat="+params.lat+"&lon="+params.lon+"&units=metric&appid="+context.getters.getKey)
+      context.commit('setDetailedCity', data)
     }
   },
   getters: {
     getCities: (state) => { return state.citiesData },
-    getKey: (state) => { return state.APIkey }
+    getKey: (state) => { return state.APIkey },
+    getDetailedData: (state) => { return state.detailedData }
   },
   modules: {
   }
