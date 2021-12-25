@@ -6,7 +6,7 @@
 
 <style lang="scss">
 
-$width: 500px;
+@import "./src/scss/vars.scss";
 
 * {
   padding: 0;
@@ -16,7 +16,7 @@ $width: 500px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #d0d0d0;
+  color: $light;
 }
 .layout {
   display: flex;
@@ -27,8 +27,8 @@ $width: 500px;
 
 input {
   border: none;
-  background: #d0d0d0;
-  color: #2a2a2e;
+  background: $light;
+  color: $dark;
   width: 200px;
   height: 50px;
   border-radius: 1rem;
@@ -39,7 +39,7 @@ input {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  background: #dfd313;
+  background:$accent-main;
   border-radius: 25px;
   max-height: 50px;
   height: 50px;
@@ -47,7 +47,7 @@ input {
   max-width: 100%;
   border: none;
   font-size: 20px;
-  color: #2a2a2e;
+  color: $dark;
   font-weight: bold;
   padding-top: 5px;
   cursor: pointer;
@@ -55,7 +55,7 @@ input {
     width: 50px;
     height: 50px;
     border-radius: 4px;
-    background: #dfd313;
+    background:$accent-main;
     img {
       height: auto;
       width: 100%;
@@ -64,7 +64,7 @@ input {
   }
 
   &:hover {
-    background: #f7f2a5;
+    background: $accent-light;
   }
 
 }
