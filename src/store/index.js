@@ -27,8 +27,9 @@ export default new Vuex.Store({
   },
   actions: {
     addCityFromAPI: async (context, city) => {
-      let {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey)
-      context.commit('addCity', data)
+      await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey).catch().then(({data}) => {
+        context.commit('addCity', data)
+      })
     },
     refreshCityFromAPI: async (context, city) => {
       let {data} = await axios.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+context.getters.getKey)
@@ -37,7 +38,7 @@ export default new Vuex.Store({
     getDetailedDataFromAPI: async (context, params) => {
       let {data} = await axios.get("https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,daily,alerts&lat="+params.lat+"&lon="+params.lon+"&units=metric&appid="+context.getters.getKey)
       context.commit('setDetailedCity', data)
-    }
+    },
   },
   getters: {
     getCities: (state) => { return state.citiesData },

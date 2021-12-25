@@ -94,11 +94,6 @@ export default {
     height: 50px;
     border-radius: 4px;
     background: #dfd313;
-    img {
-      height: auto;
-      width: 100%;
-      max-width: 100%;
-    }
   }
 
   .temperature-row {

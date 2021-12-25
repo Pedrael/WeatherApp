@@ -5,6 +5,9 @@
 </template>
 
 <style lang="scss">
+
+$width: 500px;
+
 * {
   padding: 0;
   margin: 0;
@@ -21,7 +24,17 @@
   align-items: center;
   margin-top: 2rem;
 }
-.button {
+
+input {
+  border: none;
+  background: #d0d0d0;
+  color: #2a2a2e;
+  width: 200px;
+  height: 50px;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+.button, .small-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +51,37 @@
   font-weight: bold;
   padding-top: 5px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.5s;.img-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    background: #dfd313;
+    img {
+      height: auto;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 
   &:hover {
     background: #f7f2a5;
   }
 
 }
+
+.small-button {
+  padding: 0;
+  width: 50px;
+}
+
+.img-wrap {
+  img {
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 .flex {
   display: flex;
 }
