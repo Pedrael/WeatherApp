@@ -73,7 +73,7 @@ export default {
         }, secs)
       },
       addCard: function() { // add user inputed new city
-        if(this.cards.find ((city => this.typedCity == city.name)) == undefined) {
+        if(this.cards.find ((city => this.typedCity.replace(/\s+/g, '').toLowerCase() == city.name.toLowerCase() )) == undefined) {
           this.$store.dispatch('addCityFromAPI', this.typedCity).catch(()=>{
             this.showPopup(1500, "This city doesn`t exist!")
           }).then(()=>{
